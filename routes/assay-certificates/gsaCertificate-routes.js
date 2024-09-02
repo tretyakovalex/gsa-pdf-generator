@@ -6,6 +6,7 @@ const path = require('path');
 const moment = require('moment-timezone');
 const FormData = require('form-data');
 
+require('dotenv').config();
 
 // const { generateInvoice } = require('../invoices/generate-invoice.js');
 const { generateCertificatePdf } = require('../../handlebars/compileCertificateTemplate.js');
@@ -42,7 +43,8 @@ router.post('/generateAssayCertificatePdf', async (req, res) => {
         form.append('pdf', fs.createReadStream(assay_certificate_file_path));
         
         // Send the PDF file to Server 1
-        axios.post('http://localhost:4000/upload-assay-certificate-pdf', form, {
+        // axios.post('http://localhost:4000/upload-assay-certificate-pdf', form, {
+        axios.post(`${process.env.DESTINATION_URL}/upload-assay-certificate-pdf`, form, {
             headers: {
                 ...form.getHeaders()
             }

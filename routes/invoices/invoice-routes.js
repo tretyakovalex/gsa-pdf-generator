@@ -10,6 +10,7 @@ const { generatePdf } = require('../../handlebars/compiledHandlebars.js');
 const axios = require('axios');
 const FormData = require('form-data');
 
+require('dotenv').config();
 
 // getting data (including mysql) for invoice pdf generation
 router.post('/generateInvoicePdf', async (req, res) => {
@@ -25,7 +26,8 @@ router.post('/generateInvoicePdf', async (req, res) => {
         form.append('pdf', fs.createReadStream(invoice_file_path));
         
         // Send the PDF file to Server 1
-        axios.post('http://localhost:4000/upload-invoice-pdf', form, {
+        // axios.post('http://localhost:4000/upload-invoice-pdf', form, {
+        axios.post(`${process.env.DESTINATION_URL}/upload-invoice-pdf`, form, {
             headers: {
                 ...form.getHeaders()
             }
