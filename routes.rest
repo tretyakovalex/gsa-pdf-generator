@@ -1,0 +1,44 @@
+# http://localhost:4400/api/createInvoice
+
+###
+POST http://localhost:4400/api/createInvoice
+Content-Type: application/json
+
+{
+  "certType": "ORIGINAL",
+  "paddedNum": "00361",
+  "certNumVersion": "F",
+  "customer": {
+    "company": "Bukavu CDMC Entite SARL",
+    "email": "cdmcbukavu@gmail.com",
+    "address": "23 AV.TANGANIKA, quartier Nduba, BUKAVU, DRC",
+    "Sample_No": 361
+  },
+  "registration": [
+    {
+      "gsa_sample_id": "GSA-Ta-2024-00361",
+      "Customer_sample_name": "BU-8",
+      "itsci_number": null,
+      "Type": "Tantalum",
+      "Lot_weight": null,
+      "date": "2024-07-30T00:00:00.000Z",
+      "Sampling_date": null,
+      "Sample_No": 361,
+      "Full_scan": false
+    }
+  ],
+  "method": {
+    "Sample_Preparation": "Miling & Mixing, Fusion",
+    "Methods": "GSA-XRF-SOP-001 GSA-XRF-SOP-002"
+  },
+  "releaseDate": "30.07.2024",
+  "date": "30.07.2024",
+  "date_of_lab": "01.09.2024",
+  "Sampling_date": "Invalid date",
+  "results": [ { "name": "Ta2O5", "value": "19.50 %" } ],
+  "sampledGSA": true,
+  "addSignatures": true,
+  "certificate_file_name": "GSA-Ta-2024-00361",
+  "RA_present": false,
+  "RA_In_Kg": false
+}
