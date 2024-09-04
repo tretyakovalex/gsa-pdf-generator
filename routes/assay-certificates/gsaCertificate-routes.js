@@ -38,24 +38,30 @@ router.post('/generateAssayCertificatePdf', async (req, res) => {
 
         console.log("assay_certificate_path: ", assay_certificate_file_path); 
 
-        // --- send generated invoice to server ---
-        const form = new FormData();
-        form.append('pdf', fs.createReadStream(assay_certificate_file_path));
+        const file_name = assay_certificate_file_path.match(/[^\/]+$/)[0];
+        let file_location = path.join(__dirname, '..', '..', 'handlebars', 'gsa-certificates', file_name);
+        console.log("printing file location: ", file_location);
+
+        res.download(file_location);
+
+        // // --- send generated invoice to server ---
+        // const form = new FormData();
+        // form.append('pdf', fs.createReadStream(assay_certificate_file_path));
         
-        // Send the PDF file to Server 1
-        // axios.post('http://localhost:4000/upload-assay-certificate-pdf', form, {
-        axios.post(`${process.env.DESTINATION_URL}/upload-assay-certificate-pdf`, form, {
-            headers: {
-                ...form.getHeaders()
-            }
-        })
-        .then(response => {
-            console.log('Assay Certificate PDF sent successfully:', response.data);
-        })
-        .catch(error => {
-            console.error('Error sending PDF:', error);
-        });
-        // ----------------------------------------
+        // // Send the PDF file to Server 1
+        // // axios.post('http://localhost:4000/upload-assay-certificate-pdf', form, {
+        // axios.post(`${process.env.DESTINATION_URL}/upload-assay-certificate-pdf`, form, {
+        //     headers: {
+        //         ...form.getHeaders()
+        //     }
+        // })
+        // .then(response => {
+        //     console.log('Assay Certificate PDF sent successfully:', response.data);
+        // })
+        // .catch(error => {
+        //     console.error('Error sending PDF:', error);
+        // });
+        // // ----------------------------------------
 
     } catch (error) {
         console.error(error);
