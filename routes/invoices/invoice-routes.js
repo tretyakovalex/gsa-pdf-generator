@@ -19,26 +19,30 @@ router.post('/generateInvoicePdf', async (req, res) => {
 
         let invoice_file_path = await generatePdf(data);
 
-        console.log(invoice_file_path); 
+        const file_name = invoice_file_path.match(/[^\/]+$/)[0];
+        let file_location = path.join(__dirname, '..', '..', 'handlebars', 'gsa-invoices', file_name);
+        console.log("printing file location: ", file_location);
 
-        // --- send generated invoice to server ---
-        const form = new FormData();
-        form.append('pdf', fs.createReadStream(invoice_file_path));
+        res.download(file_location);
+
+        // // --- send generated invoice to server ---
+        // const form = new FormData();
+        // form.append('pdf', fs.createReadStream(invoice_file_path));
         
-        // Send the PDF file to Server 1
-        // axios.post('http://localhost:4000/upload-invoice-pdf', form, {
-        axios.post(`${process.env.DESTINATION_URL}/upload-invoice-pdf`, form, {
-            headers: {
-                ...form.getHeaders()
-            }
-        })
-        .then(response => {
-            console.log('Invoice PDF sent successfully:', response.data);
-        })
-        .catch(error => {
-            console.error('Error sending PDF:', error);
-        });
-        // ----------------------------------------
+        // // Send the PDF file to Server 1
+        // // axios.post('http://localhost:4000/upload-invoice-pdf', form, {
+        // axios.post(`${process.env.DESTINATION_URL}/upload-invoice-pdf`, form, {
+        //     headers: {
+        //         ...form.getHeaders()
+        //     }
+        // })
+        // .then(response => {
+        //     console.log('Invoice PDF sent successfully:', response.data);
+        // })
+        // .catch(error => {
+        //     console.error('Error sending PDF:', error);
+        // });
+        // // ----------------------------------------
 
     } catch (error) {
         console.error(error);

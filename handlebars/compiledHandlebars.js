@@ -78,7 +78,7 @@ async function generatePdf(clientInvoiceData) {
         let pdf_directory = path.join(__dirname, 'gsa-invoices');
         const file_name = await getFilePath(pdf_directory, clientInvoiceData.invoice_file_name);
 
-        // console.log("Priting pdf file name: ", file_name);
+        console.log("Priting pdf file name inside compiledHandlebars: ", file_name);
 
         modifiedClientInvoiceData.file_name = file_name.replace('.pdf', '');
 
@@ -113,33 +113,65 @@ async function generatePdf(clientInvoiceData) {
     }
 }
 
-async function getFilePath(basePath, file_name) {
+// Helper function to format the current date and time
+function getTimestamp() {
+    const now = new Date();
+    return `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}${now.getMinutes().toString().padStart(2, '0')}${now.getSeconds().toString().padStart(2, '0')}`;
+}
 
+async function getFilePath(basePath, file_name) {
     const files = await fs.readdir(basePath);
     const matchingFiles = files.filter(file => file.startsWith(file_name) && file.endsWith('.pdf'));
 
-    if(matchingFiles.length === 0){
-        return `${file_name}.pdf`;
-    } else if (matchingFiles.length > 0){
-        let latestVersion = 0;
-        let latestFile = `${file_name}.pdf`;
+    const newFileName = `${file_name}.pdf`; // Just the file name without the path
+    
+    if (matchingFiles.length === 0) {
+        // No matching file, return the new file name as is
+        return newFileName;
+    } else {
+        // If a matching file exists, rename it with a timestamp
+        const timestamp = getTimestamp();
+        const existingFilePath = path.join(basePath, matchingFiles[0]); // Assuming the first match
+        const renamedFileName = `${file_name}_${timestamp}.pdf`;
+        const renamedFilePath = path.join(basePath, renamedFileName);
 
-        matchingFiles.forEach(file => {
-            const versionMatch = file.match(/_v(\d+)\.pdf$/);
-            if (versionMatch) {
-                const version = parseInt(versionMatch[1], 10);
-                latestVersion = version + 1;
+        // Rename the existing file
+        await fs.rename(existingFilePath, renamedFilePath);
 
-                latestFile = `${file.replace(/_v\d+\.pdf$/, `_v${latestVersion}.pdf`)}`;
-            } else if (!file.includes('_v') && latestVersion === 0) {
-                // If there is no version and it's the first match
-                latestFile = `${file_name}_v1.pdf`;
-            }
-        });
+        console.log(`Renamed existing file to ${renamedFileName}`);
 
-        return latestFile;
+        // Return the new file name (newFileName for the current file)
+        return newFileName;
     }
 }
+
+// async function getFilePath(basePath, file_name) {
+
+//     const files = await fs.readdir(basePath);
+//     const matchingFiles = files.filter(file => file.startsWith(file_name) && file.endsWith('.pdf'));
+
+//     if(matchingFiles.length === 0){
+//         return `${file_name}.pdf`;
+//     } else if (matchingFiles.length > 0){
+//         let latestVersion = 0;
+//         let latestFile = `${file_name}.pdf`;
+
+//         matchingFiles.forEach(file => {
+//             const versionMatch = file.match(/_v(\d+)\.pdf$/);
+//             if (versionMatch) {
+//                 const version = parseInt(versionMatch[1], 10);
+//                 latestVersion = version + 1;
+
+//                 latestFile = `${file.replace(/_v\d+\.pdf$/, `_v${latestVersion}.pdf`)}`;
+//             } else if (!file.includes('_v') && latestVersion === 0) {
+//                 // If there is no version and it's the first match
+//                 latestFile = `${file_name}_v1.pdf`;
+//             }
+//         });
+
+//         return latestFile;
+//     }
+// }
 
 async function getCurrentFormattedDate(){
     const date = new Date();

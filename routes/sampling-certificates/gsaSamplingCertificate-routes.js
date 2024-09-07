@@ -32,7 +32,7 @@ router.post('/generateSamplingCertficate', async (req, res) => {
         const file_name = pdfPath.match(/[^\/]+$/)[0];
         let file_location = path.join(__dirname, '..', '..', 'handlebars', 'gsa-sampling-certificates', file_name);
         console.log("printing file location: ", file_location);
-        
+
         res.download(file_location);
         
     } catch (error) {
