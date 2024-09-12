@@ -100,10 +100,12 @@
                         <p><strong>Date of lab performance:</strong></p>
                         <p>{{date_of_lab}}</p>
                     </div>
+                    {{#if Sampling_date}}
                     <div class="item" style="padding-bottom: 2px;" *ngIf="Sampling_date !== 'Invalid date'">
                         <p><strong>Sampling Date:</strong></p>
                         <p>{{Sampling_date}}</p>
                     </div>
+                    {{/if}}
                     <div class="item" *ngIf="!Sampling_date">
                     </div>
                     <div class="sampling-condition">
