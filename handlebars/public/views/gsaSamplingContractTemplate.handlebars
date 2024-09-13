@@ -20,7 +20,12 @@
         <div class="header">
             <div class="customer">
                 <h3>Customer Details:</h3>
-                <p><strong>Name or Company:</strong> {{customer.name}}</p>
+                {{#if customer.company}}
+                    <p><strong>Company:</strong> {{customer.company}}</p>
+                {{/if}}
+                {{#if customer.name}}
+                    <p><strong>Name:</strong> {{customer.name}}</p>
+                {{/if}}
                 <p><strong>TIN:</strong> {{customer.tin}}</p>
                 <p><strong>Address:</strong> {{customer.address}}</p>
                 <p><strong>Phone Number:</strong> {{customer.phone}}</p>
@@ -47,7 +52,6 @@
                             <th class="table-row-label">Measurement Service</th>
                             <th class="table-data">
                                 <p class="measurementData">{{measurementService}}</p>
-                                <!-- <p class="measurementData">{{measurementService}}</p> -->
                             </th>
                         <!-- </ng-container> -->
                     </tr>
