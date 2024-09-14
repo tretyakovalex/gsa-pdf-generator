@@ -465,9 +465,17 @@ table.bags-table th, td {
     margin-top: 20px;
 }
 
-#packingPage .img-container img {
+#packingPage .img-container img#barrel-img {
     width: 600px;
     height: 400px;
+    /* height: 800px; */
+    border: 3px solid black;
+}
+
+#packingPage .img-container img {
+    width: 600px;
+    /* height: 400px; */
+    height: 800px;
     border: 3px solid black;
 }
 
