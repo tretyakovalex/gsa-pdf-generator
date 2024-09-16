@@ -212,7 +212,7 @@ async function generateInvoice(Sample_No, date){
 
                 let clientInvoiceData = {
                     "customer_details": {
-                        "company_name": customerData[0].company,
+                        "company_name": customerData[0].company ? customerData[0].company : customerData[0].name,
                         "company_address": customerData[0].address,
                         "company_phone": customerData[0].phone,
                         "company_email": customerData[0].email

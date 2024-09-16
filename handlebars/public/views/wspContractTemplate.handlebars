@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./public/stylesheets/wspContractTemplate.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="page">
+        <img src="./public/assets/background.jpg" alt="" class="background">
+        <div class="content">
+            <div class="title">
+                <h3>Contract form for Weighing, Sampling, and Packing Service:</h3>
+            </div>
+            <div class="date">
+                <p style="text-decoration: none;"><strong>Date:</strong> {{release_date}}</p>
+            </div>
+            <div class="customer-details">
+                <h4>Customer Details:</h4>
+                <ul>
+                    <li>
+                        <p><strong>Name or Company:</strong> {{client.company}}</p>
+                        <!-- <p><strong>Name or Company:</strong> STAR DRAGON CORPORATION LIMITED</p> -->
+                    </li>
+                    <li>
+                        <p><strong>TIN:</strong> {{client.tin}}</p>
+                        <!-- <p><strong>TIN:</strong> 22/29269904</p> -->
+                    </li>
+                    <li>
+                        <p><strong>Address:</strong> {{client.address}}</p>
+                        <!-- <p><strong>Address:</strong>  Room 810, 8/F. Nan Fung Comercial Centre, 19 Lam Lok Street, Kowloon Bay, Kowloon, Hong Kong</p> -->
+                    </li>
+                    <li>
+                        <p><strong>Phone Number:</strong> {{client.phone}}</p>
+                        <!-- <p><strong>Phone Number:</strong> </p> -->
+                    </li>
+                </ul>
+            </div>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="table-row-label">Material Type</td>
+                        <td class="table-data">{{materialType}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-row-label">GSA Job Reference</td>
+                        <td class="table-data">GSA{{sample_no}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-row-label">Service to be provided</td>
+                        <td class="table-data">{{service}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-row-label">Assigned Surveyor</td>
+                        <td class="table-data">{{surveyor}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-row-label">Approved Quotation Value</td>
+                        <td class="table-data">{{quotation_value}}</td>
+                    </tr>
+                    <tr>
+                        {{!-- <td class="table-data" *ngIf="!time">{{future_sampling_date}}</td> --}}
+                        {{#unless future_sampling_time}}
+                            <td class="table-row-label">Date for start</td>
+                            <td class="table-data" *ngIf="time">{{future_sampling_date}}</td>
+                        {{/unless}}
+                        {{#if future_sampling_time}}
+                            <td class="table-row-label">Date and Time for start</td>
+                            <td class="table-data" *ngIf="time">{{future_sampling_date}}, {{future_sampling_time}}</td>
+                        {{/if}}
+                    </tr>
+                    <tr>
+                        <td class="table-row-label">Location of Service</td>
+                        <td class="table-data">{{location_service}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <div class="agreement-container">
+                <p><strong>Agreed between:</strong></p>
+                <div class="agreement-container-content">
+                    <div class="left">
+                        <h4>Company or customer representative:</h4>
+                        <h4>[Name and Signature]</h4>
+                    </div>
+                    <div class="right">
+                        <h4>GSA representative:</h4>
+                        <h4>[Name and Signature]</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Special Economic Zone, Plot No B2,</p>
+                <p>PO. BOX 3251, Kigali Rwanda</p>
+                <p>Tel. +250788300142</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

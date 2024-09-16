@@ -1,0 +1,123 @@
+.page {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 20mm;
+    page-break-after: always;
+    position: relative;
+    background-color: white;
+}
+
+img.background {
+    position: absolute;
+    top: 150px;
+    left: 20px;
+    z-index: 0;
+    width: 200mm;
+}
+
+h2.sub-title{
+    text-align: center;
+    margin-top: 100px;
+    color: gray;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.content .title {
+    display: flex;
+    justify-content: center;
+    margin-top: -25px;
+}
+.content .title h3 {
+    text-decoration: underline;
+}
+
+.content .date {
+    display: flex;
+    justify-content: right;
+    margin-top: 50px;
+    z-index: 1;
+}
+        
+.content .date h4 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.content .customer-details {
+        width: 100%;
+        margin-top: 60px;
+        z-index: 1;
+}
+
+.content .customer-details h4 {
+    text-decoration: underline;
+}
+
+.content table {
+        margin-top: 70px;
+        text-align: center;
+        border-collapse: collapse;
+        z-index: 1;
+}
+
+.content table th, td {
+    border: 1px solid black;
+    padding: 5px;
+    max-width: 200px;
+    text-align: left;
+}
+
+.content table td {
+    margin: 2px;
+    padding: 2px;
+}
+
+.content table td.table-row-label {
+    max-width: 100px;
+    font-weight: bold;
+}
+
+.content table td.table-data {
+    min-width: 200px
+}
+
+.content ul li {
+    margin-bottom: -10px;
+}
+
+.agreement-container {
+    margin-top: 70px;
+    z-index: 1;
+}
+
+.agreement-container .agreement-container-content {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+}
+
+.agreement-container  .agreement-container-content  .left h4, .agreement-container  .agreement-container-content .right h4 {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 80px;
+    width: 100%;
+    /* padding-bottom: 40px; */
+}
+
+.footer p {
+    margin: 0;
+    padding: 2px;
+    font-weight: bold;
+}

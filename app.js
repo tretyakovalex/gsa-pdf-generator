@@ -23,6 +23,7 @@ app.use(require('./routes/sampling-contracts/gsaSamplingContract-routes.js'));
 app.use(require('./routes/images/upload-images-route.js'));
 app.use(require('./routes/assay-certificates/gsaCertificate-routes.js'));
 app.use(require('./routes/invoices/invoice-routes.js'));
+app.use(require('./routes/wsp-contract/wsp-contract-routes.js'));
 
 // === Server: ===
 // ===============
