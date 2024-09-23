@@ -23,9 +23,9 @@
                 {{#if customer.company}}
                     <p><strong>Company:</strong> {{customer.company}}</p>
                 {{/if}}
-                {{#if customer.name}}
-                    <p><strong>Name:</strong> {{customer.name}}</p>
-                {{/if}}
+                {{#unless customer.company}}
+                    <p><strong>Name:</strong> {{customer.name}} {{customer.surname}}</p>
+                {{/unless}}
                 <p><strong>TIN:</strong> {{customer.tin}}</p>
                 <p><strong>Address:</strong> {{customer.address}}</p>
                 <p><strong>Phone Number:</strong> {{customer.phone}}</p>
