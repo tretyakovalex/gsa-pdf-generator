@@ -34,9 +34,9 @@
                         {{#if company}}
                             <p style="color: rgb(69, 69, 69); width: 250px;" *ngIf="company"><strong>{{company}}</strong></p>
                         {{/if}}
-                        {{#if name}}
-                                <p style="color: rgb(69, 69, 69); width: 250px;" *ngIf="name && !company"><strong>{{name}}</strong></p>
-                        {{/if}}
+                        {{#unless company}}
+                                <p style="color: rgb(69, 69, 69); width: 250px;" *ngIf="name && !company"><strong>{{name}} {{surname}}</strong></p>
+                        {{/unless}}
                     </div>
                     <div class="item">
                         <p style="text-align: right; width: 120px;">Email:</p>
